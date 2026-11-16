@@ -1,0 +1,25 @@
+{
+  "name": "coin-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "~58.0.21",
+    "expo-status-bar": "~58.0.4",
+    "react": "19.3.0",
+    "react-native": "0.88.1"
+  },
+  "devDependencies": {
+    "@types/react": "~19.3.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.5"
+  }
+}
