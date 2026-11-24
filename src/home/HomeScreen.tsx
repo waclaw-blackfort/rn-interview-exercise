@@ -1,5 +1,5 @@
 import { memo, useCallback, useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
 import { formatChange, formatPrice } from '../format';
 import { locale, useTranslation } from '../i18n';
@@ -11,7 +11,7 @@ import { MARKET_IDS, useMarkets } from './useMarkets';
 
 const NAMES: Record<(typeof MARKET_IDS)[number], string> = { bitcoin: 'Bitcoin', ethereum: 'Ethereum', solana: 'Solana', binancecoin: 'BNB', tron: 'TRON' };
 
-export function HomeScreen() {
+export function HomeScreen({ onWatchlist }: { onWatchlist?: () => void }) {
   const { t } = useTranslation();
   const c = useTheme();
   const { prices, error, updatedAt, reload } = useMarkets();
@@ -26,6 +26,11 @@ export function HomeScreen() {
   return (
     <Screen>
       <TopBar title={t('home.title')} />
+      {onWatchlist && (
+        <Pressable onPress={onWatchlist} style={styles.watchlist}>
+          <Text style={{ color: c.accent, fontSize: 16, fontWeight: '600' }}>My watchlist ›</Text>
+        </Pressable>
+      )}
       <FlatList
         data={MARKET_IDS}
         keyExtractor={(id) => id}
@@ -62,5 +67,6 @@ const styles = StyleSheet.create({
   right: { alignItems: 'flex-end' },
   price: { fontSize: 16 },
   change: { fontSize: 14 },
+  watchlist: { paddingHorizontal: 16, paddingVertical: 10 },
   footer: { textAlign: 'center', fontSize: 14, marginVertical: 16 },
 });
